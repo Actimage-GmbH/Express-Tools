@@ -6,6 +6,7 @@
   "author": "Actimage GmbH <baptiste.bellot@actimage.com>",
   "license": "SEE LICENSE IN somewhere.md",
   "dependencies": {
+    "actimage-mongodb-driver-tools": "git+https://gitlab.actimage.de/actimage/node.js/mongodb-drivers-tools.git#dev",
     "joi": "^13.6.0"
   }
 }
