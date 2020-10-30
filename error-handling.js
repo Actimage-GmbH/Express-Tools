@@ -240,10 +240,14 @@ var defaultHandleError = (req, res) => {
         statusCode: 404
     });
 };
+//set up database error class for database errors handling
+let db = require('actimage-mongodb-driver-tools').database;
+
 
 var Errors = {
     ApiError: ApiError,
-    AuthError: AuthError
+    AuthError: AuthError,
+    DatabaseError: db.errorClass
 };
 var DatabaseError;
 var currentConf;
@@ -274,9 +278,7 @@ module.exports = {
 
 
 
-        //set up database error class for database errors handling
-        Errors.DatabaseError = db.errorClass;
-        DatabaseError = Errors.DatabaseError;
+        
         excludedPath = exclude;
         //set various error handlers for the app
         app.use(authHandleError);
