@@ -256,7 +256,6 @@ var _console;
 
 module.exports = {
     setErrorHandler: (app, exclude, setLog) => {
-        let db = require('actimage-mongodb-driver-tools').database;
         currentConf = app.get('cfg');
         currentConf.debug = currentConf.debug || process.env.DEBUG;
 
