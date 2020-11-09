@@ -249,7 +249,7 @@ var Errors = {
     AuthError: AuthError,
     DatabaseError: db.errorClass
 };
-var DatabaseError;
+var DatabaseError = db.errorClass;
 var currentConf;
 var excludedPath;
 var _console;
