@@ -1,16 +1,13 @@
-function AccessController (cfg) {
+function AccessController(cfg) {
     // Get access control config
     const roles = cfg;
-    
-    
+
     let buildPath = req => req.method.toUpperCase() + (req.app.basePath || req.baseUrl || '') + req.route.path;
-    
     // Check if reqest path is under access control
     let checkPath = req => {
         let access = roles[buildPath(req)];
         return typeof access !== "undefined" && access !== null;
     };
-    
     // Check if given user can access the request
     let checkAccesses = (req, user) => {
         // Retrieve access definition with request method and path
@@ -41,21 +38,18 @@ function AccessController (cfg) {
             for (let key in allowedScope) {
                 var val = allowedScope[key];
 
-                for (let i in user.clients) {
-                    let client = user.clients[i];
-                    for (let j in client.scope) {
-                        let scope = client.scope[j];
-                        if (key === scope) {
-                            if (val.constructor === Object) {
-                                let pk = Object.keys(allowedScope[key]);
-                                for (let p in pk) {
-                                    if (req.params[pk[p]] === user[allowedScope[key][pk[p]]]) {
-                                        return true;
-                                    }
+                for (let j in user.scope) {
+                    let scope = user.scope[j];
+                    if (key === scope) {
+                        if (val.constructor === Object) {
+                            let pk = Object.keys(allowedScope[key]);
+                            for (let p in pk) {
+                                if (req.params[pk[p]] === user[allowedScope[key][pk[p]]]) {
+                                    return true;
                                 }
-                            } else {
-                                return true;
                             }
+                        }else {
+                            return true;
                         }
                     }
                 }
